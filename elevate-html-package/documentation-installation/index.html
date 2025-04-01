@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevate Template Package - Documentation</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+            --border-color: #ddd;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            padding: 0;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        header h1 span {
+            color: var(--accent-color);
+        }
+        
+        header p {
+            font-size: 18px;
+            color: #777;
+        }
+        
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .card-header h2 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+        
+        .card-header p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .card-body p {
+            margin-bottom: 20px;
+        }
+        
+        .card-body ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .card-body li {
+            margin-bottom: 8px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .template-section {
+            margin-bottom: 60px;
+        }
+        
+        .template-section h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .template-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .template-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .template-card-header {
+            height: 200px;
+            background-color: #ddd;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .template-card-header.alt {
+            background-color: var(--secondary-color);
+        }
+        
+        .template-card-header.colorful {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        }
+        
+        .template-card-header.portfolio {
+            background-color: #2c3e50;
+        }
+        
+        .template-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .template-card-body {
+            padding: 25px;
+        }
+        
+        .template-card-body h3 {
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .template-card-body p {
+            margin-bottom: 20px;
+        }
+        
+        .template-card-body ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .template-card-body li {
+            margin-bottom: 8px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: #777;
+        }
+        
+        @media (max-width: 768px) {
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .template-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Elevate<span>Templates</span></h1>
+            <p>Complete Documentation Package</p>
+        </header>
+        
+        <div class="card-container">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Installation Guide</h2>
+                    <p>Get started with Elevate Templates</p>
+                </div>
+                <div class="card-body">
+                    <p>This comprehensive guide covers everything you need to know about installing and setting up the Elevate Template Package:</p>
+                    <ul>
+                        <li>Quick installation steps</li>
+                        <li>Detailed installation instructions</li>
+                        <li>Template comparison</li>
+                        <li>File structure explanation</li>
+                        <li>Local development setup</li>
+                        <li>Troubleshooting common issues</li>
+                    </ul>
+                    <a href="installation_guide.html" class="btn btn-block">View Installation Guide</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>Usage Documentation</h2>
+                    <p>Learn how to use and customize templates</p>
+                </div>
+                <div class="card-body">
+                    <p>This detailed documentation explains how to use and customize all templates in the Elevate package:</p>
+                    <ul>
+                        <li>Template overview and features</li>
+                        <li>Customization options</li>
+                        <li>Component explanations</li>
+                        <li>JavaScript functionality</li>
+                        <li>Responsive design features</li>
+                        <li>Browser compatibility</li>
+                    </ul>
+                    <a href="template_usage_documentation.html" class="btn btn-block">View Usage Documentation</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>Additional Requirements</h2>
+                    <p>ThemeForest submission requirements</p>
+                </div>
+                <div class="card-body">
+                    <p>This guide covers all the additional requirements for submitting the Elevate Template Package to ThemeForest:</p>
+                    <ul>
+                        <li>Preview image specifications</li>
+                        <li>Thumbnail requirements</li>
+                        <li>License information</li>
+                        <li>Changelog and version history</li>
+                        <li>Credits and attributions</li>
+                        <li>Submission checklist</li>
+                    </ul>
+                    <a href="additional_requirements.html" class="btn btn-block">View Additional Requirements</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="template-section">
+            <h2>Template Variations</h2>
+            <div class="template-cards">
+                <div class="template-card">
+                    <div class="template-card-header alt">
+                        <div class="template-name">
+                            <h3>Elevate-Alt</h3>
+                        </div>
+                    </div>
+                    <div class="template-card-body">
+                        <h3>Clean, Professional Template with Toggleable Sidebar</h3>
+                        <p>Elevate-Alt is a clean, minimal template with a toggleable sidebar navigation system that improves usability, especially on smaller screens.</p>
+                        <h4>Key Features:</h4>
+                        <ul>
+                            <li>Toggleable sidebar navigation</li>
+                            <li>Clean, minimal design</li>
+                            <li>Sidebar state persistence using localStorage</li>
+                            <li>Mobile-optimized sidebar with overlay background</li>
+                        </ul>
+                        <p><strong>Perfect for:</strong> Business websites, blogs, and documentation sites</p>
+                    </div>
+                </div>
+                
+                <div class="template-card">
+                    <div class="template-card-header colorful">
+                        <div class="template-name">
+                            <h3>Elevate-Colorful</h3>
+                        </div>
+                    </div>
+                    <div class="template-card-body">
+                        <h3>Vibrant Template with Eye-Catching Gradients</h3>
+                        <p>Elevate-Colorful is a vibrant template with eye-catching gradients and modern design elements, perfect for creative businesses.</p>
+                        <h4>Key Features:</h4>
+                        <ul>
+                            <li>Vibrant color scheme with gradients</li>
+                            <li>Modern design elements with subtle animations</li>
+                            <li>Enhanced visual appeal for creative businesses</li>
+                            <li>Gradient overlays and color transitions</li>
+                        </ul>
+                        <p><strong>Perfect for:</strong> Creative agencies, startups, and marketing sites</p>
+                    </div>
+                </div>
+                
+                <div class="template-card">
+                    <div class="template-card-header portfolio">
+                        <div class="template-name">
+                            <h3>Elevate-Portfolio</h3>
+                        </div>
+                    </div>
+                    <div class="template-card-body">
+                        <h3>Portfolio-Focused Template with Project Showcase</h3>
+                        <p>Elevate-Portfolio is a specialized template with a portfolio-focused layout and project showcase features, ideal for creative professionals.</p>
+                        <h4>Key Features:</h4>
+                        <ul>
+                            <li>Portfolio-focused layout with project showcase</li>
+                            <li>Category filtering for portfolio items</li>
+                            <li>Project detail modal windows</li>
+                            <li>Optimized image display for creative work</li>
+                        </ul>
+                        <p><strong>Perfect for:</strong> Designers, photographers, artists, and creative professionals</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 Elevate Templates. All rights reserved.</p>
+            <p>For support, contact: support@elevate-templates.com</p>
+        </div>
+    </div>
+</body>
+</html>

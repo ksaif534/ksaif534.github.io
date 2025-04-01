@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevate Template Package - Additional Requirements</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+            --border-color: #ddd;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            padding: 0;
+            margin: 0;
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+        
+        .sidebar-header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-header h1 span {
+            color: var(--accent-color);
+        }
+        
+        .sidebar-header p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .sidebar-nav {
+            padding: 20px 0;
+        }
+        
+        .sidebar-nav ul {
+            list-style: none;
+        }
+        
+        .sidebar-nav li {
+            margin-bottom: 2px;
+        }
+        
+        .sidebar-nav a {
+            display: block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background-color: rgba(255,255,255,0.1);
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 40px;
+            max-width: 1000px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        h2 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-bg);
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+            margin: 25px 0 15px;
+        }
+        
+        h4 {
+            margin: 20px 0 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        ul, ol {
+            margin: 15px 0 15px 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        code {
+            background-color: var(--light-bg);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            font-size: 14px;
+        }
+        
+        pre {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        pre code {
+            background-color: transparent;
+            color: white;
+            padding: 0;
+        }
+        
+        .note {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .warning {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        table th {
+            background-color: var(--light-bg);
+            font-weight: 600;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .screenshot {
+            border: 1px solid var(--border-color);
+        }
+        
+        .image-example {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .image-example-item {
+            flex: 1;
+            min-width: 250px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .image-example-header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+        }
+        
+        .image-example-body {
+            padding: 15px;
+            background-color: var(--light-bg);
+            text-align: center;
+        }
+        
+        .image-example-footer {
+            padding: 10px 15px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+        
+        .image-placeholder {
+            background-color: #ddd;
+            width: 100%;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-weight: bold;
+        }
+        
+        .checklist {
+            list-style-type: none;
+            margin-left: 0;
+        }
+        
+        .checklist li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+        }
+        
+        .checklist li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 3px;
+        }
+        
+        .checklist li.checked:before {
+            background-color: var(--primary-color);
+            content: "✓";
+            color: white;
+            text-align: center;
+            line-height: 20px;
+            font-weight: bold;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: #777;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1>Elevate<span>Templates</span></h1>
+                <p>Additional Requirements</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#preview-images">Preview Images</a></li>
+                    <li><a href="#thumbnail">Thumbnail Image</a></li>
+                    <li><a href="#screenshot-images">Screenshot Images</a></li>
+                    <li><a href="#license-information">License Information</a></li>
+                    <li><a href="#changelog">Changelog/Version History</a></li>
+                    <li><a href="#credits">Credits and Attributions</a></li>
+                    <li><a href="#support-policy">Support Policy</a></li>
+                    <li><a href="#demo-content">Demo Content</a></li>
+                    <li><a href="#seo-information">SEO Information</a></li>
+                    <li><a href="#browser-compatibility">Browser Compatibility</a></li>
+                    <li><a href="#submission-checklist">Submission Checklist</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <div class="content">
+            <div class="section" id="preview-images">
+                <h2>Preview Images</h2>
+                <p>Preview images are crucial for showcasing your template package on Envato/ThemeForest. They are the first thing potential buyers see, so they should accurately represent your templates and highlight their key features.</p>
+                
+                <h3>Main Preview Image</h3>
+                <ul>
+                    <li><strong>Dimensions:</strong> 590px × 300px</li>
+                    <li><strong>Format:</strong> JPG or PNG</li>
+                    <li><strong>Purpose:</strong> This is the main image displayed on your item page</li>
+                </ul>
+                
+                <div class="note">
+                    <p><strong>Important:</strong> The main preview image must accurately represent the template package. It should showcase the best features and design elements from all three templates (Elevate-Alt, Elevate-Colorful, and Elevate-Portfolio).</p>
+                </div>
+                
+                <h4>Main Preview Image Guidelines</h4>
+                <ul>
+                    <li>Must be high quality and visually appealing</li>
+                    <li>Should represent the actual templates, not mockups</li>
+                    <li>No text overlays allowed</li>
+                    <li>Should be properly cropped and aligned</li>
+                    <li>Must not include any watermarks or logos</li>
+                </ul>
+                
+                <h3>Additional Preview Images</h3>
+                <ul>
+                    <li><strong>Dimensions:</strong> 590px wide (height can vary)</li>
+                    <li><strong>Format:</strong> JPG or PNG</li>
+                    <li><strong>Purpose:</strong> To showcase different aspects and features of your templates</li>
+                </ul>
+                
+                <h4>Recommended Additional Preview Images</h4>
+                <p>For a comprehensive template package like Elevate, we recommend creating the following additional preview images:</p>
+                
+                <div class="image-example">
+                    <div class="image-example-item">
+                        <div class="image-example-header">
+                            <h4>Full Homepage Views</h4>
+                        </div>
+                        <div class="image-example-body">
+                            <div class="image-placeholder">590px × 1200px</div>
+                        </div>
+                        <div class="image-example-footer">
+                            <p>Show full homepage for each template variation</p>
+                        </div>
+                    </div>
+                    
+                    <div class="image-example-item">
+                        <div class="image-example-header">
+                            <h4>Responsive Views</h4>
+                        </div>
+                        <div class="image-example-body">
+                            <div class="image-placeholder">590px × 800px</div>
+                        </div>
+                        <div class="image-example-footer">
+                            <p>Show templates on different devices</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="image-example">
+                    <div class="image-example-item">
+                        <div class="image-example-header">
+                            <h4>Feature Highlights</h4>
+                        </div>
+                        <div class="image-example-body">
+                            <div class="image-placeholder">590px × 400px</div>
+                        </div>
+                        <div class="image-example-footer">
+                            <p>Showcase special features like toggleable sidebar</p>
+                        </div>
+                    </div>
+                    
+                    <div class="image-example-item">
+                        <div class="image-example-header">
+                            <h4>Template Comparison</h4>
+                        </div>
+                        <div class="image-example-body">
+                            <div class="image-placeholder">590px × 600px</div>
+                        </div>
+                        <div class="image-example-footer">
+                            <p>Compare all three templates side by side</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="warning">
+                    <p><strong>Note:</strong> All preview images must accurately represent the actual templates. Do not use stock photos or mockups that don't reflect the real product.</p>
+                </div>
+            </div>
+            
+            <div class="section" id="thumbnail">
+                <h2>Thumbnail Image</h2>
+                <p>The thumbnail image is a small icon displayed in search results and category pages on ThemeForest.</p>
+                
+                <h3>Thumbnail Requirements</h3>
+                <ul>
+                    <li><strong>Dimensions:</strong> 80px × 80px</li>
+                    <li><strong>Format:</strong> JPG or PNG</li>
+                    <li><strong>Purpose:</strong> Small icon displayed in search results and category pages</li>
+                </ul>
+                
+                <h4>Thumbnail Guidelines</h4>
+                <ul>
+                    <li>Should be simple and recognizable</li>
+                    <li>Consistent with your brand</li>
+                    <li>No text (too small to be readable)</li>
+                    <li>High contrast for visibility</li>
+                    <li>Should represent the template package as a whole</li>
+                </ul>
+                
+                <div class="note">
+                    <p><strong>Tip:</strong> Consider using a simplified logo or icon that represents the Elevate template package. This could be a stylized "E" or a simple graphic element that appears across all three templates.</p>
+                </div>
+            </div>
+            
+            <div class="section" id="screenshot-images">
+                <h2>Screenshot Images</h2>
+                <p>Screenshot images are used in your documentation to show how to use specific features of your templates.</p>
+                
+                <h3>Screenshot Requirements</h3>
+                <ul>
+                    <li><strong>Dimensions:</strong> Various (maintain aspect ratio)</li>
+                    <li><strong>Format:</strong> JPG or PNG</li>
+                    <li><strong>Purpose:</strong> To include in documentation showing how to use specific features</li>
+                </ul>
+                
+                <h4>Recommended Screenshots</h4>
+                <p>For the Elevate template package, we recommend creating screenshots for the following features:</p>
+                
+                <h5>Common Features (All Templates)</h5>
+                <ul>
+                    <li>Navigation system</li>
+                    <li>Responsive design on different devices</li>
+                    <li>Customization examples (changing colors, fonts, etc.)</li>
+                    <li>Contact form</li>
+                </ul>
+                
+                <h5>Template-Specific Features</h5>
+                <ul>
+                    <li><strong>Elevate-Alt:</strong> Toggleable sidebar functionality</li>
+                    <li><strong>Elevate-Colorful:</strong> Gradient effects and color transitions</li>
+                    <li><strong>Elevate-Portfolio:</strong> Portfolio filtering and project showcase</li>
+                </ul>
+                
+                <div class="note">
+                    <p><strong>Tip:</strong> When creating screenshots, use annotations or highlights to draw attention to specific features or elements. This makes it easier for users to understand what they're looking at.</p>
+                </div>
+            </div>
+            
+            <div class="section" id="license-information">
+                <h2>License Information</h2>
+                <p>License information is essential for informing buyers about how they can use your template package.</p>
+                
+                <h3>License Requirements</h3>
+                <ul>
+                    <li><strong>Format:</strong> Text file or section in documentation</li>
+                    <li><strong>Content:</strong> License terms, third-party resource licenses, attribution requirements</li>
+                </ul>
+                
+                <h4>License Information to Include</h4>
+                <div class="note">
+                    <p>The following is a sample license information section that you should include in your documentation:</p>
+                </div>
+                
+                <pre><code>## License Information
+
+### Elevate Template Package License
+
+This template package is licensed under the Envato Regular License, which allows for:
+
+- One single application
+- The end product can be used by you or one client in a single end product
+- The end product can be sold to a single client
+- The end product cannot be distributed or resold "as-is"
+
+For more information about the Envato Regular License, please visit:
+https://themeforest.net/licenses/standard
+
+### Third-Party Resources
+
+The following third-party resources are included in this template package:
+
+1. **Font Awesome Icons**
+   - License: Font Awesome Free License
+   - Source: https://fontawesome.com/license/free
+
+2. **Google Fonts (Poppins, Montserrat)**
+   - License: SIL Open Font License
+   - Source: https://fonts.google.com/specimen/Poppins
+   - Source: https://fonts.google.com/specimen/Montserrat
+
+### Attribution Requirements
+
+- Font Awesome: No attribution required for Font Awesome Free
+- Google Fonts: No attribution required for Google Fonts
+
+All other elements of the template package are created by the author and are covered by the Envato Regular License.</code></pre>
+            </div>
+            
+            <div class="section" id="changelog">
+                <h2>Changelog/Version History</h2>
+                <p>A changelog or version history helps buyers track updates and changes to your template package.</p>
+                
+                <h3>Changelog Requirements</h3>
+                <ul>
+                    <li><strong>Format:</strong> Text file or section in documentation</li>
+                    <li><strong>Purpose:</strong> To track updates and changes to the template package</li>
+                </ul>
+                
+                <h4>Sample Changelog</h4>
+                <pre><code>## Changelog
+
+### Version 1.0.0 (Initial Release) - March 25, 2025
+- Initial release of the Elevate Template Package
+- Includes three template variations: Elevate-Alt, Elevate-Colorful, and Elevate-Portfolio
+- Fully responsive design for all templates
+- Cross-browser compatibility
+- Comprehensive documentation
+
+### Future Updates
+Future updates will be listed here with version numbers and changes.</code></pre>
+                
+                <div class="note">
+                    <p><strong>Tip:</strong> Keep your changelog up to date with each new version of your template package. This helps buyers understand what has changed and whether they should update their existing installations.</p>
+                </div>
+            </div>
+            
+            <div class="section" id="credits">
+                <h2>Credits and Attributions</h2>
+                <p>Credits and attributions acknowledge the third-party resources used in your template package.</p>
+                
+                <h3>Credits Requirements</h3>
+                <ul>
+                    <li><strong>Format:</strong> Text file or section in documentation</li>
+                    <li><strong>Content:</strong> List of all third-party resources used, proper attribution, links to original sources</li>
+                </ul>
+                
+                <h4>Sample Credits Section</h4>
+                <pre><code>## Credits and Attributions
+
+### Fonts
+- **Poppins** - Google Fonts (https://fonts.google.com/specimen/Poppins)
+- **Montserrat** - Google Fonts (https://fonts.google.com/specimen/Montserrat)
+
+### Icons
+- **Font Awesome** - Icon font (https://fontawesome.com/)
+
+### Images
+All images used in the templates are placeholder images created specifically for these templates.
+
+### Libraries and Plugins
+The templates use vanilla JavaScript without external libraries or plugins. All functionality is implemented using native JavaScript.
+
+### Special Thanks
+Special thanks to the web development community for inspiration and best practices that helped shape these templates.</code></pre>
+                
+                <div class="warning">
+                    <p><strong>Important:</strong> Always provide proper attribution for any third-party resources used in your template package. Failure to do so may result in your submission being rejected.</p>
+                </div>
+            </div>
+            
+            <div class="section" id="support-policy">
+                <h2>Support Policy</h2>
+                <p>A support policy outlines what kind of support buyers can expect after purchasing your template package.</p>
+                
+                <h3>Support Policy Requirements</h3>
+                <ul>
+                    <li><strong>Format:</strong> Text file or section in documentation</li>
+                    <li><strong>Content:</strong> Support terms and conditions, what is covered/not covered, contact information</li>
+                </ul>
+                
+                <h4>Sample Support Policy</h4>
+                <pre><code>## Support Policy
+
+### Support Includes
+- Answering questions about template features
+- Helping with issues related to template functionality
+- Providing guidance on basic customization
+- Fixing bugs in the template code
+
+### Support Does Not Include
+- Custom development or extensive customization
+- Integration with third-party systems not mentioned in the documentation
+- Creating custom designs or layouts
+- Setting up hosting or servers
+- Installing the template on your server
+
+### How to Get Support
+If you need assistance with the Elevate Template Package, please contact us:
+- Email: support@elevate-templates.com
+- Support Ticket: [Submit a ticket](https://www.elevate-templates.com/support)
+
+### Response Time
+We aim to respond to all support requests within 24-48 hours, Monday through Friday.
+
+### Support Duration
+Support is provided for 6 months from the date of purchase. Extended support is available for an additional fee.</code></pre>
+                
+                <div class="note">
+                    <p><strong>Tip:</strong> Be clear about what is and isn't included in your support. This helps set expectations and reduces misunderstandings with buyers.</p>
+                </div>
+            </div>
+            
+            <div class="section" id="demo-content">
+                <h2>Demo Content</h2>
+                <p>Demo content helps buyers understand how to use your template package and see it in action.</p>
+                
+                <h3>Demo Content Requirements</h3>
+                <ul>
+                    <li><strong>Format:</strong> Separate folder or included in main package</li>
+                    <li><strong>Content:</strong> Sample content that matches preview images, placeholder text and images, example configurations</li>
+                </ul>
+                
+                <h4>Demo Content to Include</h4>
+                <p>For the Elevate template package, include the following demo content:</p>
+                
+                <h5>Common Demo Content (All Templates)</h5>
+                <ul>
+                    <li>Sample text for all sections (hero, about, services, etc.)</li>
+                    <li>Placeholder images for all image elements</li>
+                    <li>Example contact form</li>
+                </ul>
+                
+                <h5>Template-Specific Demo Content</h5>
+                <ul>
+                    <li><strong>Elevate-Alt:</strong> Example sidebar content and toggle functionality</li>
+                    <li><strong>Elevate-Colorful:</strong> Example gradient sections and color transitions</li>
+                    <li><strong>Elevate-Portfolio:</strong> Example portfolio items with different categories</li>
+                </ul>
+                
+                <div class="warning">
+                    <p><strong>Important:</strong> All demo content must be properly licensed for distribution. Do not include any copyrighted content without permission.</p>
+                </div>
+            </div>
+            
+            <div class="section" id="seo-information">
+                <h2>SEO Information</h2>
+                <p>SEO information helps buyers understand how to optimize their websites for search engines using your template package.</p>
+                
+                <h3>SEO Information Requirements</h3>
+                <ul>
+                    <li><strong>Format:</strong> Section in documentation</li>
+                    <li><strong>Content:</strong> Meta tags usage, SEO best practices implemented in the template, how to customize SEO elements</li>
+                </ul>
+                
+                <h4>Sample SEO Information Section</h4>
+                <pre><code>## SEO Information
+
+### SEO Features Implemented
+The Elevate Template Package includes the following SEO features:
+
+- Semantic HTML5 structure
+- Proper heading hierarchy (h1, h2, h3, etc.)
+- Meta tags for title, description, and keywords
+- Open Graph meta tags for social sharing
+- Schema.org markup for improved search engine understanding
+- Mobile-friendly responsive design (improves SEO ranking)
+- Fast loading times (optimized code and assets)
+
+### Customizing SEO Elements
+To customize the SEO elements in the templates:
+
+1. **Page Title and Meta Description**
+   - Open `index.html`
+   - Find the `<title>` tag and update it with your page title
+   - Find the `<meta name="description">` tag and update it with your page description
+
+2. **Open Graph Meta Tags**
+   - Open `index.html`
+   - Find the Open Graph meta tags (starting with `<meta property="og:">`)
+   - Update them with your information for social sharing
+
+3. **Schema.org Markup**
+   - Open `index.html`
+   - Find the Schema.org markup (in the `<script type="application/ld+json">` section)
+   - Update it with your information for improved search engine understanding
+
+### SEO Best Practices
+When using these templates, follow these SEO best practices:
+
+- Use descriptive, keyword-rich page titles
+- Write compelling meta descriptions
+- Use descriptive alt text for images
+- Create descriptive URLs
+- Optimize content with relevant keywords
+- Ensure fast loading times
+- Make sure your website is mobile-friendly</code></pre>
+                
+                <div class="note">
+                    <p><strong>Tip:</strong> Highlighting the SEO features of your template package can be a strong selling point for buyers who are concerned about search engine visibility.</p>
+                </div>
+            </div>
+            
+            <div class="section" id="browser-compatibility">
+                <h2>Browser Compatibility Statement</h2>
+                <p>A browser compatibility statement informs buyers about which browsers your template package works with.</p>
+                
+                <h3>Browser Compatibility Requirements</h3>
+                <ul>
+                    <li><strong>Format:</strong> Section in documentation</li>
+                    <li><strong>Content:</strong> List of supported browsers, any known issues with specific browsers, recommended browsers</li>
+                </ul>
+                
+                <h4>Sample Browser Compatibility Statement</h4>
+                <pre><code>## Browser Compatibility
+
+### Fully Supported Browsers
+The Elevate Template Package is fully compatible with the following browsers:
+
+- Google Chrome (latest)
+- Mozilla Firefox (latest)
+- Apple Safari (latest)
+- Microsoft Edge (latest)
+- Opera (latest)
+
+### Partially Supported Browsers
+The templates have partial support for:
+
+- Internet Explorer 11 (basic functionality works, but some visual effects may be limited)
+- Older versions of supported browsers (within the last 2 years)
+
+### Known Issues
+The following issues may occur in older browsers:
+
+- CSS variables are not supported in IE11 and below
+- Some CSS Grid and Flexbox features may not work correctly in older browsers
+- CSS animations and transitions may be less smooth in older browsers
+- Some JavaScript ES6 features may not work in older browsers without polyfills
+
+### Recommended Browsers
+For the best experience with these templates, we recommend using the latest versions of Chrome, Firefox, Safari, or Edge.</code></pre>
+                
+                <div class="warning">
+                    <p><strong>Important:</strong> Be honest about browser compatibility. It's better to be upfront about limitations than to have disappointed buyers.</p>
+                </div>
+            </div>
+            
+            <div class="section" id="submission-checklist">
+                <h2>Submission Checklist</h2>
+                <p>Use this checklist to ensure your template package meets all Envato/ThemeForest requirements before submission.</p>
+                
+                <h3>Code Quality</h3>
+                <ul class="checklist">
+                    <li>HTML is W3C validated</li>
+                    <li>CSS is W3C validated</li>
+                    <li>No inline CSS (all styles in external stylesheets)</li>
+                    <li>Clean, well-commented code</li>
+                    <li>Proper file organization and structure</li>
+                    <li>No premium plugins, scripts, or images that require licensing</li>
+                    <li>All third-party resources properly credited</li>
+                </ul>
+                
+                <h3>Cross-Browser Compatibility</h3>
+                <ul class="checklist">
+                    <li>Works in Chrome (latest)</li>
+                    <li>Works in Firefox (latest)</li>
+                    <li>Works in Safari (latest)</li>
+                    <li>Works in Edge (latest)</li>
+                    <li>Works in Opera (latest)</li>
+                </ul>
+                
+                <h3>Responsive Design</h3>
+                <ul class="checklist">
+                    <li>Fully responsive on all devices</li>
+                    <li>Mobile-friendly navigation</li>
+                    <li>Properly sized images</li>
+                    <li>Readable text on all screen sizes</li>
+                    <li>Touch-friendly elements on mobile</li>
+                </ul>
+                
+                <h3>Documentation</h3>
+                <ul class="checklist">
+                    <li>Comprehensive HTML documentation included</li>
+                    <li>Installation instructions</li>
+                    <li>Template customization guide</li>
+                    <li>File structure explanation</li>
+                    <li>Credits for third-party resources</li>
+                    <li>Support information</li>
+                    <li>Changelog/version history</li>
+                </ul>
+                
+                <h3>Assets</h3>
+                <ul class="checklist">
+                    <li>All included assets properly licensed</li>
+                    <li>Images optimized for web use</li>
+                    <li>Proper attribution for third-party resources</li>
+                    <li>No placeholder content in final submission</li>
+                </ul>
+                
+                <h3>Preview Images</h3>
+                <ul class="checklist">
+                    <li>Main preview image (590px × 300px)</li>
+                    <li>Additional preview images (590px wide)</li>
+                    <li>Thumbnail image (80px × 80px)</li>
+                    <li>All preview images accurately represent the template</li>
+                </ul>
+                
+                <h3>Submission Package</h3>
+                <ul class="checklist">
+                    <li>Main HTML/CSS/JS files</li>
+                    <li>Documentation file (HTML format)</li>
+                    <li>Demo content</li>
+                    <li>Preview images</li>
+                    <li>All files organized in a clean structure</li>
+                </ul>
+                
+                <h3>Additional Requirements</h3>
+                <ul class="checklist">
+                    <li>Unique and original design</li>
+                    <li>Follows latest web design trends</li>
+                    <li>Visually appealing and easy to navigate</li>
+                    <li>Multiple template variations</li>
+                    <li>Clear customization options</li>
+                </ul>
+                
+                <div class="note">
+                    <p><strong>Tip:</strong> Go through this checklist item by item before submitting your template package to Envato/ThemeForest. This will help ensure a smooth review process and increase your chances of approval.</p>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <p>&copy; 2025 Elevate Templates. All rights reserved.</p>
+                <p>For support, contact: support@elevate-templates.com</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

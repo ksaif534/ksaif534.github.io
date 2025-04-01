@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevate Template Package - Usage Documentation</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+            --border-color: #ddd;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            padding: 0;
+            margin: 0;
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+        
+        .sidebar-header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-header h1 span {
+            color: var(--accent-color);
+        }
+        
+        .sidebar-header p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .sidebar-nav {
+            padding: 20px 0;
+        }
+        
+        .sidebar-nav ul {
+            list-style: none;
+        }
+        
+        .sidebar-nav li {
+            margin-bottom: 2px;
+        }
+        
+        .sidebar-nav a {
+            display: block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background-color: rgba(255,255,255,0.1);
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .sidebar-nav .submenu {
+            padding-left: 20px;
+            display: none;
+        }
+        
+        .sidebar-nav .submenu.active {
+            display: block;
+        }
+        
+        .content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 40px;
+            max-width: 1000px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        h2 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-bg);
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+            margin: 25px 0 15px;
+        }
+        
+        h4 {
+            margin: 20px 0 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        ul, ol {
+            margin: 15px 0 15px 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        code {
+            background-color: var(--light-bg);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            font-size: 14px;
+        }
+        
+        pre {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        pre code {
+            background-color: transparent;
+            color: white;
+            padding: 0;
+        }
+        
+        .note {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .warning {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .template-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .template-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+            background-color: var(--light-bg);
+        }
+        
+        .template-tab.active {
+            background-color: white;
+            border-color: var(--border-color);
+            font-weight: bold;
+        }
+        
+        .template-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .template-content.active {
+            display: block;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        table th {
+            background-color: var(--light-bg);
+            font-weight: 600;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .screenshot {
+            border: 1px solid var(--border-color);
+        }
+        
+        .color-swatch {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            border-radius: 3px;
+            vertical-align: middle;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: #777;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1>Elevate<span>Templates</span></h1>
+                <p>Usage Documentation</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#overview">Template Overview</a></li>
+                    <li><a href="#template-variations">Template Variations</a></li>
+                    <li><a href="#customization">Customization Guide</a></li>
+                    <li><a href="#components">Components</a></li>
+                    <li><a href="#javascript">JavaScript Functionality</a></li>
+                    <li><a href="#responsive">Responsive Design</a></li>
+                    <li><a href="#browser-compatibility">Browser Compatibility</a></li>
+                    <li><a href="#credits">Credits</a></li>
+                    <li><a href="#support">Support</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <div class="content">
+            <div class="section" id="overview">
+                <h2>Template Overview</h2>
+                <p>The Elevate Template Package includes three professionally designed, responsive HTML/CSS templates suitable for various purposes. Each template shares a common core structure while offering unique design elements and specialized features.</p>
+                
+                <h3>Common Features Across All Templates</h3>
+                <ul>
+                    <li>Fully responsive design that works on all devices</li>
+                    <li>Clean, modern aesthetics following latest web design trends</li>
+                    <li>Modular structure for easy customization</li>
+                    <li>Cross-browser compatibility</li>
+                    <li>Well-commented code for easy understanding</li>
+                    <li>Optimized for performance</li>
+                    <li>Contact form with validation</li>
+                    <li>Smooth scrolling navigation</li>
+                </ul>
+                
+                <h3>Template-Specific Features</h3>
+                <div class="template-tabs">
+                    <div class="template-tab active" onclick="switchTemplate(event, 'elevate-alt')">Elevate-Alt</div>
+                    <div class="template-tab" onclick="switchTemplate(event, 'elevate-colorful')">Elevate-Colorful</div>
+                    <div class="template-tab" onclick="switchTemplate(event, 'elevate-portfolio')">Elevate-Portfolio</div>
+                </div>
+                
+                <div id="elevate-alt" class="template-content active">
+                    <h4>Elevate-Alt Features</h4>
+                    <ul>
+                        <li>Toggleable sidebar navigation for improved usability</li>
+                        <li>Clean, minimal design with alternative color scheme</li>
+                        <li>Sidebar state persistence using localStorage</li>
+                        <li>Mobile-optimized sidebar with overlay background</li>
+                        <li>Perfect for business websites, blogs, and documentation sites</li>
+                    </ul>
+                </div>
+                
+                <div id="elevate-colorful" class="template-content">
+                    <h4>Elevate-Colorful Features</h4>
+                    <ul>
+                        <li>Vibrant color scheme with eye-catching gradients</li>
+                        <li>Modern design elements with subtle animations</li>
+                        <li>Enhanced visual appeal for creative businesses</li>
+                        <li>Gradient overlays and color transitions</li>
+                        <li>Perfect for creative agencies, startups, and marketing sites</li>
+                    </ul>
+                </div>
+                
+                <div id="elevate-portfolio" class="template-content">
+                    <h4>Elevate-Portfolio Features</h4>
+                    <ul>
+                        <li>Portfolio-focused layout with project showcase</li>
+                        <li>Category filtering for portfolio items</li>
+                        <li>Project detail modal windows</li>
+                        <li>Optimized image display for creative work</li>
+                        <li>Perfect for designers, photographers, artists, and creative professionals</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section" id="template-variations">
+                <h2>Template Variations</h2>
+                <p>This section provides a detailed overview of each template variation, helping you choose the right one for your project.</p>
+                
+                <h3>Elevate-Alt</h3>
+                <p>Elevate-Alt is a clean, minimal template with a toggleable sidebar navigation system that improves usability, especially on smaller screens.</p>
+                
+                <h4>Key Characteristics</h4>
+                <ul>
+                    <li><strong>Design Style:</strong> Clean, minimal, and professional</li>
+                    <li><strong>Color Scheme:</strong> Neutral with subtle accents</li>
+                    <li><strong>Navigation:</strong> Toggleable sidebar that can be hidden/shown as needed</li>
+                    <li><strong>Special Feature:</strong> Sidebar toggle functionality with state persistence</li>
+                </ul>
+                
+                <h4>When to Use Elevate-Alt</h4>
+                <p>Choose Elevate-Alt when:</p>
+                <ul>
+                    <li>You need a clean, professional website for business or corporate use</li>
+                    <li>Your content requires a navigation system that can be hidden to maximize screen space</li>
+                    <li>You want a template that works exceptionally well on both desktop and mobile devices</li>
+                    <li>You prefer a minimal design that puts focus on your content</li>
+                </ul>
+                
+                <h3>Elevate-Colorful</h3>
+                <p>Elevate-Colorful is a vibrant template with eye-catching gradients and modern design elements, perfect for creative businesses.</p>
+                
+                <h4>Key Characteristics</h4>
+                <ul>
+                    <li><strong>Design Style:</strong> Vibrant, modern, and eye-catching</li>
+                    <li><strong>Color Scheme:</strong> Colorful gradients and bold accents</li>
+                    <li><strong>Navigation:</strong> Standard navigation with colorful highlights</li>
+                    <li><strong>Special Feature:</strong> Gradient overlays and color transitions</li>
+                </ul>
+                
+                <h4>When to Use Elevate-Colorful</h4>
+                <p>Choose Elevate-Colorful when:</p>
+                <ul>
+                    <li>You want to create a visually striking website that stands out</li>
+                    <li>Your brand uses vibrant colors and modern design elements</li>
+                    <li>You're creating a website for a creative agency, startup, or marketing company</li>
+                    <li>You want to convey energy, creativity, and innovation</li>
+                </ul>
+                
+                <h3>Elevate-Portfolio</h3>
+                <p>Elevate-Portfolio is a specialized template with a portfolio-focused layout and project showcase features, ideal for creative professionals.</p>
+                
+                <h4>Key Characteristics</h4>
+                <ul>
+                    <li><strong>Design Style:</strong> Portfolio-focused, content-centric</li>
+                    <li><strong>Color Scheme:</strong> Minimal to highlight portfolio work</li>
+                    <li><strong>Navigation:</strong> Standard navigation with portfolio filters</li>
+                    <li><strong>Special Feature:</strong> Portfolio filtering and project showcase</li>
+                </ul>
+                
+                <h4>When to Use Elevate-Portfolio</h4>
+                <p>Choose Elevate-Portfolio when:</p>
+                <ul>
+                    <li>You need to showcase a collection of work or projects</li>
+                    <li>You're a designer, photographer, artist, or creative professional</li>
+                    <li>Your website's primary purpose is to display your portfolio</li>
+                    <li>You want visitors to easily filter and browse your work by category</li>
+                </ul>
+            </div>
+            
+            <div class="section" id="customization">
+                <h2>Customization Guide</h2>
+                <p>This section provides detailed instructions on how to customize all templates in the Elevate package.</p>
+                
+                <h3>Common Customization Options</h3>
+                <p>The following customization options apply to all templates in the package:</p>
+                
+                <h4>Changing Colors and Styles</h4>
+                <p>All templates use CSS variables for easy customization. To change the color scheme:</p>
+                <ol>
+                    <li>Open <code>css/variables.css</code> in your code editor</li>
+                    <li>Modify the color variables in the <code>:root</code> section:</li>
+                </ol>
+                
+                <pre><code>:root {
+    /* Main Colors */
+    --primary-color: #3498db;     /* Change this for primary color */
+    --secondary-color: #2c3e50;   /* Change this for secondary color */
+    --accent-color: #e74c3c;      /* Change this for accent color */
+    --light-color: #ecf0f1;       /* Change this for light color */
+    --dark-color: #2c3e50;        /* Change this for dark color */
+    
+    /* Background Colors */
+    --bg-light: #f5f5f5;          /* Change this for light background */
+    --bg-white: #ffffff;          /* Change this for white background */
+    --bg-dark: #2c3e50;           /* Change this for dark background */
+    
+    /* Text Colors */
+    --text-dark: #333333;         /* Change this for dark text */
+    --text-light: #ffffff;        /* Change this for light text */
+    --text-muted: #7f8c8d;        /* Change this for muted text */
+}</code></pre>
+                
+                <h4>Changing Fonts</h4>
+                <p>To change the fonts used in the templates:</p>
+                <ol>
+                    <li>Update the Google Fonts link in the <code>&lt;head&gt;</code> section of <code>index.html</code>:</li>
+                </ol>
+                
+                <pre><code>&lt;link href="https://fonts.googleapis.com/css2?family=YOUR_FONT:wght@300;400;500;600;700&display=swap" rel="stylesheet"&gt;</code></pre>
+                
+                <ol start="2">
+                    <li>Update the font variables in <code>css/variables.css</code>:</li>
+                </ol>
+                
+                <pre><code>:root {
+    /* Fonts */
+    --heading-font: 'YOUR_HEADING_FONT', sans-serif;
+    --body-font: 'YOUR_BODY_FONT', sans-serif;
+}</code></pre>
+                
+                <h4>Modifying Layout Spacing</h4>
+                <p>To adjust spacing throughout the templates:</p>
+                <ol>
+                    <li>Modify the spacing variables in <code>css/variables.css</code>:</li>
+                </ol>
+                
+                <pre><code>:root {
+    /* Spacing */
+    --section-padding: 80px 0;    /* Change this for section padding */
+    --container-padding: 0 15px;  /* Change this for container padding */
+    --element-margin: 20px;       /* Change this for element margins */
+}</code></pre>
+                
+                <h3>Template-Specific Customization</h3>
+                
+                <h4>Elevate-Alt: Customizing the Toggleable Sidebar</h4>
+                <p>To customize the sidebar in Elevate-Alt:</p>
+                
+                <ol>
+                    <li>Modify the sidebar width in <code>css/variables.css</code>:</li>
+                </ol>
+                
+                <pre><code>:root {
+    --sidebar-width: 280px;       /* Change this to adjust sidebar width */
+    --sidebar-collapsed-width: 0; /* Width when sidebar is hidden */
+}</code></pre>
+                
+                <ol start="2">
+                    <li>Customize the sidebar toggle button in <code>css/alternative.css</code>:</li>
+                </ol>
+                
+                <pre><code>.sidebar-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    /* Other styles */
+}</code></pre>
+                
+                <ol start="3">
+                    <li>Adjust the sidebar behavior in <code>js/sidebar.js</code> if needed</li>
+                </ol>
+                
+                <h4>Elevate-Colorful: Customizing Gradients and Colors</h4>
+                <p>To customize the vibrant colors in Elevate-Colorful:</p>
+                
+                <ol>
+                    <li>Modify the gradient variables in <code>css/colorful.css</code>:</li>
+                </ol>
+                
+                <pre><code>:root {
+    --gradient-primary: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-accent: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}</code></pre>
+                
+                <ol start="2">
+                    <li>Adjust the color overlay opacity in <code>css/colorful.css</code>:</li>
+                </ol>
+                
+                <pre><code>.color-overlay {
+    opacity: 0.8; /* Change this to adjust overlay intensity */
+}</code></pre>
+                
+                <h4>Elevate-Portfolio: Customizing Portfolio Grid</h4>
+                <p>To customize the portfolio grid in Elevate-Portfolio:</p>
+                
+                <ol>
+                    <li>Modify the grid layout in <code>css/portfolio.css</code>:</li>
+                </ol>
+                
+                <pre><code>.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Change this to adjust columns */
+    gap: 20px; /* Change this to adjust spacing between items */
+}</code></pre>
+                
+                <ol start="2">
+                    <li>Customize the portfolio filters in <code>index.html</code>:</li>
+                </ol>
+                
+                <pre><code>&lt;div class="portfolio-filter"&gt;
+    &lt;button class="filter-btn active" data-filter="all"&gt;All&lt;/button&gt;
+    &lt;button class="filter-btn" data-filter="web"&gt;Web Design&lt;/button&gt;
+    &lt;button class="filter-btn" data-filter="graphic"&gt;Graphic Design&lt;/button&gt;
+    &lt;button class="filter-btn" data-filter="photography"&gt;Photography&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                
+                <ol start="3">
+                    <li>Make sure portfolio items have the correct <code>data-category</code> attribute:</li>
+                </ol>
+                
+                <pre><code>&lt;div class="portfolio-item" data-category="web"&gt;
+    &lt;!-- Portfolio item content --&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+            
+            <div class="section" id="components">
+                <h2>Components</h2>
+                <p>This section details the various components available across all templates in the Elevate package.</p>
+                
+                <h3>Common Components</h3>
+                <p>The following components are available in all templates:</p>
+                
+                <h4>Navigation</h4>
+                <p>Each template includes a navigation system that links to different sections of the page. To modify the navigation:</p>
+                <ol>
+                    <li>Edit the navigation HTML in <code>index.html</code></li>
+                    <li>Make sure the <code>href</code> attributes match the section IDs</li>
+                    <li>Add or remove navigation items as needed</li>
+                </ol>
+                
+                <div class="note">
+                    <p><strong>Note:</strong> In Elevate-Alt, the navigation is located in the sidebar. In Elevate-Colorful and Elevate-Portfolio, it's in the header.</p>
+                </div>
+                
+                <h4>Hero Section</h4>
+                <p>The hero section is the first section visitors see. To modify it:</p>
+                <ol>
+                    <li>Edit the hero section HTML in <code>index.html</code></li>
+                    <li>Replace the hero image in the <code>img</code> folder</li>
+                    <li>Update the heading, text, and buttons as needed</li>
+                </ol>
+                
+                <h4>About Section</h4>
+                <p>The about section provides information about your business or project. To modify it:</p>
+                <ol>
+                    <li>Edit the about section HTML in <code>index.html</code></li>
+                    <li>Replace the about image in the <code>img</code> folder</li>
+                    <li>Update the text and features as needed</li>
+                </ol>
+                
+                <h4>Services Section</h4>
+                <p>The services section showcases your services or offerings. To modify it:</p>
+                <ol>
+                    <li>Edit the services section HTML in <code>index.html</code></li>
+                    <li>Update the service cards with your own services</li>
+                    <li>Change the icons using Font Awesome classes</li>
+                </ol>
+                
+                <h4>Contact Form</h4>
+                <p>The contact form allows visitors to get in touch. To modify it:</p>
+                <ol>
+                    <li>Edit the contact form HTML in <code>index.html</code></li>
+                    <li>Update the form fields as needed</li>
+                    <li>To make the form functional, you'll need to add backend processing (not included)</li>
+                </ol>
+                
+                <h4>Footer</h4>
+                <p>The footer contains additional information and links. To modify it:</p>
+                <ol>
+                    <li>Edit the footer HTML in <code>index.html</code></li>
+                    <li>Update the footer content with your own information</li>
+                    <li>Modify the social media links as needed</li>
+                </ol>
+                
+                <h3>Template-Specific Components</h3>
+                
+                <h4>Elevate-Alt: Toggleable Sidebar</h4>
+                <p>The toggleable sidebar is a key feature of Elevate-Alt. It consists of:</p>
+                <ul>
+                    <li>Sidebar container with navigation and profile information</li>
+                    <li>Toggle button to show/hide the sidebar</li>
+                    <li>JavaScript functionality to toggle the sidebar and save its state</li>
+                </ul>
+                
+                <p>To customize the sidebar:</p>
+                <ol>
+                    <li>Edit the sidebar HTML in <code>index.html</code></li>
+                    <li>Modify the sidebar styles in <code>css/alternative.css</code></li>
+                    <li>Adjust the sidebar toggle behavior in <code>js/sidebar.js</code> if needed</li>
+                </ol>
+                
+                <h4>Elevate-Colorful: Gradient Sections</h4>
+                <p>Elevate-Colorful features sections with gradient backgrounds. To customize these:</p>
+                <ol>
+                    <li>Edit the section HTML in <code>index.html</code></li>
+                    <li>Modify the gradient styles in <code>css/colorful.css</code></li>
+                    <li>Adjust the color overlay opacity as needed</li>
+                </ol>
+                
+                <h4>Elevate-Portfolio: Portfolio Grid and Filters</h4>
+                <p>Elevate-Portfolio includes a portfolio grid with filtering functionality. To customize it:</p>
+                <ol>
+                    <li>Edit the portfolio section HTML in <code>index.html</code></li>
+                    <li>Update the filter buttons to match your categories</li>
+                    <li>Edit the portfolio items, making sure to set the correct <code>data-category</code> attribute</li>
+                    <li>Replace portfolio images in the <code>img/portfolio</code> folder</li>
+                </ol>
+            </div>
+            
+            <div class="section" id="javascript">
+                <h2>JavaScript Functionality</h2>
+                <p>This section explains the JavaScript functionality available in the Elevate template package.</p>
+                
+                <h3>Common JavaScript Features</h3>
+                <p>The following JavaScript features are available in all templates:</p>
+                
+                <h4>Smooth Scrolling</h4>
+                <p>All templates include smooth scrolling for navigation links:</p>
+                <ul>
+                    <li>Implemented in <code>js/main.js</code></li>
+                    <li>Works with all navigation links that point to section IDs</li>
+                    <li>Provides a smooth scrolling animation when clicking navigation links</li>
+                </ul>
+                
+                <h4>Form Validation</h4>
+                <p>The contact form includes basic validation:</p>
+                <ul>
+                    <li>Implemented in <code>js/main.js</code></li>
+                    <li>Validates required fields</li>
+                    <li>Displays error messages for invalid inputs</li>
+                    <li>Shows a success message on successful submission</li>
+                </ul>
+                
+                <div class="note">
+                    <p><strong>Note:</strong> To make the form actually send emails, you'll need to add backend processing (not included in the template).</p>
+                </div>
+                
+                <h4>Responsive Menu</h4>
+                <p>All templates include a responsive menu for mobile devices:</p>
+                <ul>
+                    <li>Implemented in <code>js/main.js</code></li>
+                    <li>Shows a mobile menu toggle button on small screens</li>
+                    <li>Toggles the menu visibility when clicking the button</li>
+                    <li>Closes the menu when clicking a navigation link</li>
+                </ul>
+                
+                <h3>Template-Specific JavaScript Features</h3>
+                
+                <h4>Elevate-Alt: Sidebar Toggle</h4>
+                <p>The sidebar toggle functionality in Elevate-Alt:</p>
+                <ul>
+                    <li>Implemented in <code>js/sidebar.js</code></li>
+                    <li>Toggles the <code>sidebar-hidden</code> class on the <code>body</code> element</li>
+                    <li>Saves the sidebar state to localStorage</li>
+                    <li>Automatically collapses the sidebar on mobile devices</li>
+                    <li>Provides a smooth transition when showing/hiding the sidebar</li>
+                </ul>
+                
+                <p>Key functions in <code>sidebar.js</code>:</p>
+                <pre><code>// Toggle sidebar visibility
+function toggleSidebar() {
+    document.body.classList.toggle('sidebar-hidden');
+    saveSidebarState();
+}
+
+// Save sidebar state to localStorage
+function saveSidebarState() {
+    const isHidden = document.body.classList.contains('sidebar-hidden');
+    localStorage.setItem('sidebar-hidden', isHidden);
+}
+
+// Load sidebar state from localStorage
+function loadSidebarState() {
+    const isHidden = localStorage.getItem('sidebar-hidden') === 'true';
+    if (isHidden) {
+        document.body.classList.add('sidebar-hidden');
+    }
+}</code></pre>
+                
+                <h4>Elevate-Portfolio: Portfolio Filtering</h4>
+                <p>The portfolio filtering functionality in Elevate-Portfolio:</p>
+                <ul>
+                    <li>Implemented in <code>js/portfolio.js</code></li>
+                    <li>Filters portfolio items based on their <code>data-category</code> attribute</li>
+                    <li>Shows all items when clicking the "All" filter</li>
+                    <li>Shows only items matching the selected category for other filters</li>
+                    <li>Provides a smooth transition when filtering items</li>
+                </ul>
+                
+                <p>Key functions in <code>portfolio.js</code>:</p>
+                <pre><code>// Filter portfolio items
+function filterPortfolio(category) {
+    const items = document.querySelectorAll('.portfolio-item');
+    
+    items.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        
+        if (category === 'all' || itemCategory === category) {
+            item.style.display = 'block';
+            setTimeout(() => {
+                item.classList.add('show');
+            }, 50);
+        } else {
+            item.classList.remove('show');
+            setTimeout(() => {
+                item.style.display = 'none';
+            }, 300);
+        }
+    });
+}</code></pre>
+            </div>
+            
+            <div class="section" id="responsive">
+                <h2>Responsive Design</h2>
+                <p>All templates in the Elevate package are fully responsive and work well on all devices. This section explains the responsive design features.</p>
+                
+                <h3>Breakpoints</h3>
+                <p>The templates use the following breakpoints:</p>
+                <ul>
+                    <li><strong>Large screens</strong>: 1200px and above</li>
+                    <li><strong>Medium screens</strong>: 992px to 1199px</li>
+                    <li><strong>Tablets</strong>: 768px to 991px</li>
+                    <li><strong>Mobile</strong>: 767px and below</li>
+                </ul>
+                
+                <p>These breakpoints are defined in <code>css/responsive.css</code>:</p>
+                <pre><code>/* Large screens */
+@media (min-width: 1200px) {
+    /* Styles for large screens */
+}
+
+/* Medium screens */
+@media (min-width: 992px) and (max-width: 1199px) {
+    /* Styles for medium screens */
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 991px) {
+    /* Styles for tablets */
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    /* Styles for mobile devices */
+}</code></pre>
+                
+                <h3>Mobile-Specific Features</h3>
+                <p>On mobile devices, the templates include the following features:</p>
+                <ul>
+                    <li>Adjusted font sizes and spacing for better readability</li>
+                    <li>Simplified layouts with single-column content</li>
+                    <li>Mobile-optimized navigation</li>
+                    <li>Touch-friendly buttons and interactive elements</li>
+                    <li>Optimized images for faster loading</li>
+                </ul>
+                
+                <h3>Template-Specific Responsive Behaviors</h3>
+                
+                <h4>Elevate-Alt</h4>
+                <p>On mobile devices, Elevate-Alt:</p>
+                <ul>
+                    <li>Automatically hides the sidebar by default</li>
+                    <li>Shows a toggle button to reveal the sidebar when needed</li>
+                    <li>Displays an overlay background when the sidebar is open</li>
+                    <li>Automatically closes the sidebar when clicking outside or on a navigation link</li>
+                </ul>
+                
+                <h4>Elevate-Colorful</h4>
+                <p>On mobile devices, Elevate-Colorful:</p>
+                <ul>
+                    <li>Simplifies gradient effects for better performance</li>
+                    <li>Adjusts color overlays for better readability</li>
+                    <li>Converts the navigation to a mobile menu</li>
+                    <li>Stacks content sections vertically</li>
+                </ul>
+                
+                <h4>Elevate-Portfolio</h4>
+                <p>On mobile devices, Elevate-Portfolio:</p>
+                <ul>
+                    <li>Reduces the portfolio grid to a single column</li>
+                    <li>Converts the category filters to a dropdown on smaller screens</li>
+                    <li>Simplifies project modals for better mobile viewing</li>
+                    <li>Optimizes image loading for faster performance</li>
+                </ul>
+                
+                <h3>Testing Responsiveness</h3>
+                <p>To test the responsive design of the templates:</p>
+                <ol>
+                    <li>Use your browser's developer tools to simulate different screen sizes</li>
+                    <li>Test on actual devices when possible</li>
+                    <li>Check that all features work correctly at all screen sizes</li>
+                    <li>Verify that text is readable and buttons are easily clickable on small screens</li>
+                </ol>
+            </div>
+            
+            <div class="section" id="browser-compatibility">
+                <h2>Browser Compatibility</h2>
+                <p>All templates in the Elevate package are designed to work well in modern browsers. This section details browser compatibility information.</p>
+                
+                <h3>Supported Browsers</h3>
+                <p>The templates are fully compatible with the following browsers:</p>
+                <ul>
+                    <li>Google Chrome (latest)</li>
+                    <li>Mozilla Firefox (latest)</li>
+                    <li>Apple Safari (latest)</li>
+                    <li>Microsoft Edge (latest)</li>
+                    <li>Opera (latest)</li>
+                </ul>
+                
+                <h3>Partial Support</h3>
+                <p>The templates have partial support for:</p>
+                <ul>
+                    <li>Internet Explorer 11 (basic functionality works, but some visual effects may be limited)</li>
+                    <li>Older versions of supported browsers (within the last 2 years)</li>
+                </ul>
+                
+                <h3>Known Issues</h3>
+                <p>The following issues may occur in older browsers:</p>
+                <ul>
+                    <li>CSS variables are not supported in IE11 and below</li>
+                    <li>Some CSS Grid and Flexbox features may not work correctly in older browsers</li>
+                    <li>CSS animations and transitions may be less smooth in older browsers</li>
+                    <li>Some JavaScript ES6 features may not work in older browsers without polyfills</li>
+                </ul>
+                
+                <div class="warning">
+                    <p><strong>Important:</strong> We recommend using a modern browser for the best experience with these templates.</p>
+                </div>
+                
+                <h3>Browser Testing</h3>
+                <p>All templates have been tested in the latest versions of Chrome, Firefox, Safari, and Edge to ensure compatibility. We recommend testing your customized template in multiple browsers before launching your website.</p>
+            </div>
+            
+            <div class="section" id="credits">
+                <h2>Credits</h2>
+                <p>This section acknowledges the resources used in the Elevate template package.</p>
+                
+                <h3>Fonts</h3>
+                <ul>
+                    <li><a href="https://fonts.google.com/specimen/Poppins" target="_blank">Poppins</a> - Google Fonts</li>
+                    <li><a href="https://fonts.google.com/specimen/Montserrat" target="_blank">Montserrat</a> - Google Fonts</li>
+                </ul>
+                
+                <h3>Icons</h3>
+                <ul>
+                    <li><a href="https://fontawesome.com/" target="_blank">Font Awesome</a> - Icon font</li>
+                </ul>
+                
+                <h3>Images</h3>
+                <p>All images used in the templates are placeholder images created specifically for these templates.</p>
+                
+                <h3>Libraries and Plugins</h3>
+                <p>The templates use vanilla JavaScript without external libraries or plugins. All functionality is implemented using native JavaScript.</p>
+                
+                <h3>Special Thanks</h3>
+                <p>Special thanks to the web development community for inspiration and best practices that helped shape these templates.</p>
+            </div>
+            
+            <div class="section" id="support">
+                <h2>Support</h2>
+                <p>This section provides information on how to get help with the Elevate template package.</p>
+                
+                <h3>Contact Information</h3>
+                <p>If you need assistance with the templates, please contact us:</p>
+                <ul>
+                    <li>Email: support@elevate-templates.com</li>
+                    <li>Support Ticket: <a href="#">Submit a ticket</a></li>
+                </ul>
+                
+                <h3>FAQ</h3>
+                <h4>Q: Can I use these templates for commercial projects?</h4>
+                <p>A: Yes, you can use these templates for both personal and commercial projects.</p>
+                
+                <h4>Q: Do I need to credit the template author?</h4>
+                <p>A: No, you don't need to credit the template author, but it's appreciated.</p>
+                
+                <h4>Q: Can I modify the templates?</h4>
+                <p>A: Yes, you can modify the templates as needed for your projects.</p>
+                
+                <h4>Q: Do the templates include a working contact form?</h4>
+                <p>A: The templates include the HTML and CSS for the contact form, but you'll need to add your own backend processing to make it functional.</p>
+                
+                <h4>Q: Can I combine elements from different templates?</h4>
+                <p>A: Yes, all templates share a common core structure, making it easy to combine elements from different templates.</p>
+                
+                <h3>Troubleshooting</h3>
+                <p>If you encounter any issues with the templates, please check the Troubleshooting section in the Installation Guide first. If the issue persists, contact our support team.</p>
+                
+                <h3>Updates</h3>
+                <p>We regularly update our templates to improve functionality and fix any issues. Check our website or contact support for information about updates.</p>
+            </div>
+            
+            <div class="footer">
+                <p>&copy; 2025 Elevate Templates. All rights reserved.</p>
+                <p>Thank you for choosing the Elevate Template Package!</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function switchTemplate(event, templateId) {
+            // Hide all template content
+            const templateContents = document.getElementsByClassName('template-content');
+            for (let i = 0; i < templateContents.length; i++) {
+                templateContents[i].classList.remove('active');
+            }
+            
+            // Remove active class from all tabs
+            const templateTabs = document.getElementsByClassName('template-tab');
+            for (let i = 0; i < templateTabs.length; i++) {
+                templateTabs[i].classList.remove('active');
+            }
+            
+            // Show the selected template content and activate the tab
+            document.getElementById(templateId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
